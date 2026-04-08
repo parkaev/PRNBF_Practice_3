@@ -1,0 +1,10 @@
+﻿{
+  "name": "pr3-config-and-security-template",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  }
+}
