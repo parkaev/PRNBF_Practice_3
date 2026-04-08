@@ -20,3 +20,13 @@ test("Ограничитель частоты блокирует лишние з
   assert.equal(limiter.allow(req), true);
   assert.equal(limiter.allow(req), false);
 });
+
+test("Доверенный источник получает заголовки CORS", () => {
+  const req = { headers: { origin: "http://localhost:5173" } };
+  const headers = new Map();
+  const res = { setHeader(k, v) { headers.set(k, v); } };
+
+  applyCors(req, res, ["http://localhost:5173", "https://example.edu"]);
+  assert.equal(headers.get("Access-Control-Allow-Origin"), "http://localhost:5173");
+  assert.equal(headers.get("Access-Control-Allow-Methods"), "GET,POST,OPTIONS");
+});
